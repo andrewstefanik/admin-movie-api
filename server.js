@@ -10,8 +10,8 @@ app.set('views', __dirname + '/public/views/');
 // Tell express out of which directory to serve static assets like CSS and images
 app.use(express.static(__dirname + '/public'));
 
-const NON_INTERACTIVE_CLIENT_ID = 'm0h2eoj4LYAsAcZtEvviaZTJafMcUXw8';
-const NON_INTERACTIVE_CLIENT_SECRET = 'gbee-JDoe6Iv5l7aqvUj4I58qvi11tymnhOCZ9WejoPetcKxDZ8YJnCBASkIiF-U';
+const NON_INTERACTIVE_CLIENT_ID = 'l1TV5pNP6BUKIYmIm1LfMscq0rl3XYgQ';
+const NON_INTERACTIVE_CLIENT_SECRET = 'I6UmOAK5kT0rC5FoLqcsb3Tcir4HbXbVHcpvV0fHl4NWqS-yj8wxOWzusOq9h1Ms';
 
 // Define object used to exchange credentials
 const authData = {
@@ -50,16 +50,16 @@ We’ll take this movie data, and pass it alongside our movies.ejs template for 
 app.get('/movies', getAccessToken, function(req, res){
     request
         .get('http://localhost:8080/movies')
-        .set('Authorization', 'Bearer', + req.access_token)
-        .end(function(err, data){
+        .set('Authorization', 'Bearer ' + req.access_token)
+        .end(function(err, data) {
             if(data.status == 403){
                 res.send(403, '403 Forbidden');
             } else {
-                let movies = data.body;
-                res.render('movies', { movies: movies });
+                var movies = data.body;
+                res.render('movies', { movies : movies });
             }
         }
-    );
+    );  
 });
 
 /*The process will be the same for the remaining routes. We’ll make sure to get the 
@@ -70,7 +70,7 @@ Our route on the client does not have to match the API endpoint route.*/
 
 app.get('/authors', getAccessToken, function(req, res){
     request
-        .get('http://localhost:8080/reviewers')
+        .get('http://localhost:8080/authors')
         .set('Authorization', 'Bearer ' + req.access_token)
         .end(function(err, data) {
             if(data.status == 403){
@@ -110,10 +110,13 @@ app.get('/pending', getAccessToken, function(req, res){
       .end(function(err, data) {
         if(data.status == 403){
           res.status(403).send('403 Forbidden');
+        } else {
+            var pending = data.body;
+                res.render('pending', { pending : pending });
         }
       }
     );
 });
 
-app.listen(3000);
+app.listen(4000);
 
