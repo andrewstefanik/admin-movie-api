@@ -2,13 +2,13 @@
 
 - **Clone repository**
 
-- <code>cd admin-movie-api</code>
+- In the Terminal/Command Line navigate to the directory <code>admin-movie-api</code>
 
-- <code>npm install</code>
+- Run <code>npm install</code>
 
-- <code>node server</code>
+- Run <code>node server</code>
 
-- <code>Navigate to [https://localhost:4000/](https://localhost:4000/) in your browser</code>
+- Navigate to <code>[https://localhost:4000/](https://localhost:4000/)</code> in your browser
 
 ## **_You must clone and launch the following API to run the application_**
 
